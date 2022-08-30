@@ -1,0 +1,64 @@
+﻿@model SudokuBoardViewModel
+
+
+<div class="text-center">
+    <h1 class="display-4">Sudoku for Volodya</h1>
+    <p>Learn about <a href="https://www.sudokuonline.io/tips/sudoku-rules">Sudoku here</a>.</p>
+</div>
+
+@using (Html.BeginForm("Index", "SudokuBoard", FormMethod.Post))
+{
+
+    @Html.HiddenFor(m => m.GameStatus)
+    @Html.HiddenFor(m => m.GameLevel)
+    @Html.HiddenFor(m => m.changedCellCoordinates, new { @id = "changedCellCoordinates", @Name = "changedCellCoordinates" })
+
+
+    <table width="550px">
+        @{
+            int cellN = 0;
+            var tbConfig = new
+            {
+                maxlength = "1",
+                size = "1",
+                autocomplete = "off",
+                style = "border:none",
+                @onkeyup = "SubmitValidCellValue(event)",
+                @onblur = "this.form.submit()"
+
+            };
+        }
+        @for (int i = 0; i < 9; i++)
+        {
+            <tr>
+                @for (int j = 0; j < 9; j++)
+                {
+                    <td>
+
+                        @Html.TextBoxFor(m => m.sudokuGrid[cellN].value, tbConfig)
+                        @Html.HiddenFor(m => m.sudokuGrid[cellN].XCoordinate)
+                        @Html.HiddenFor(m => m.sudokuGrid[cellN].YCoordinate)
+
+                        @{
+                            cellN++;
+                        }
+                    </td>
+
+
+                }
+            </tr>
+        }
+    </table>
+}
+
+<script type="text/javascript">function SubmitValidCellValue(event) {
+
+        changedCellCoordinates.value = 2;
+        var value = event.currentTarget.value;
+        if ((value == "") || (1 <= value && value <= 9)) {
+            document.updateForm.submit();
+        } else {
+            event.currentTarget.value = "";
+        }
+    }</script>
+

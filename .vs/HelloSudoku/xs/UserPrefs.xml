@@ -1,0 +1,44 @@
+﻿<Properties StartupConfiguration="{A6044B12-B9A5-4444-95BF-735A8A89AC3C}|Default">
+  <MonoDevelop.Ide.ItemProperties.HelloSudoku PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/ekaterina/Projects/HelloSudoku/HelloSudoku/Controllers/SudokuGameController.cs" relfile="HelloSudoku/Controllers/SudokuGameController.cs" line="74" column="1" />
+      <Breakpoint file="/Users/ekaterina/Projects/HelloSudoku/HelloSudoku/Controllers/SudokuBoardController.cs" relfile="HelloSudoku/Controllers/SudokuBoardController.cs" line="62" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="HelloSudoku/Views/SudokuBoard/Index.cshtml">
+    <Files>
+      <File FileName="HelloSudoku/Models/Cell.cs" Line="8" Column="22" />
+      <File FileName="HelloSudoku/Controllers/SudokuGameController.cs" Line="29" Column="13" />
+      <File FileName="HelloSudoku/Controllers/SudokuBoardController.cs" Line="61" Column="1" />
+      <File FileName="HelloSudoku/Views/SudokuBoard/Index.cshtml" Line="27" Column="46" />
+      <File FileName="HelloSudoku/Program.cs" Line="1" Column="1" />
+      <File FileName="HelloSudoku/ViewsModel/SudokuBoardViewModel.cs" Line="11" Column="63" />
+      <File FileName="HelloSudoku/ViewsModel/SudokuGameViewModel.cs" Line="80" Column="47" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="HelloSudoku" expanded="True">
+            <Node name="HelloSudoku" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="SudokuBoard" expanded="True">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
+              </Node>
+              <Node name="ViewsModel" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

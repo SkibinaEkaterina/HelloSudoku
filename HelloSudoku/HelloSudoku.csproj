@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\SudokuGame\" />
+    <None Remove="Services\" />
+    <None Remove="Services\SudokuGenerator\" />
+    <None Remove="Services\Interfaces\" />
+    <None Remove="IronPython" />
+    <None Remove="Services\SudokuGridServices\" />
+    <None Remove="ViewsModel\" />
+    <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="Data\Interfaces\" />
+    <None Remove="Data\Managers\" />
+    <None Remove="Views\SudokuBoardController\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\SudokuGame\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\SudokuGenerator\" />
+    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Services\SudokuGridServices\" />
+    <Folder Include="ViewsModel\" />
+    <Folder Include="Data\Interfaces\" />
+    <Folder Include="Data\Managers\" />
+    <Folder Include="Views\SudokuBoard\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="IronPython" Version="2.7.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.8" />
+  </ItemGroup>
+</Project>
