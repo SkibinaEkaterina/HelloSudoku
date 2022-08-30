@@ -53,9 +53,10 @@ namespace HelloSudoku.Controllers
                 _mdl.GameStatus = true;
                 _mdl.UserId = curGame.UserId;
                 _mdl.FillCellsList(grid);
+                _mdl.NumberOfMistakes = 0;
 
                 // update db
-                _dbManager.UpdateGameDataInDb(grid, finalGrid, _mdl.GameStatus);
+                _dbManager.UpdateGameDataInDb(grid, finalGrid, _mdl.GameStatus, curGame.GameLevel, _mdl.NumberOfMistakes);
 
             }
             else
@@ -64,24 +65,80 @@ namespace HelloSudoku.Controllers
                 _mdl.GameLevel = curGame.GameLevel;
                 _mdl.GameStatus = curGame.GameStatus == null ? false : (bool)curGame.GameStatus;
                 _mdl.UserId = curGame.UserId;
-                if(_dbManager.CurrentGrid != null) _mdl.FillCellsList(_dbManager.CurrentGrid);
+                _mdl.NumberOfMistakes = curGame.NumberOfMistakes;
+
+                if (_dbManager.CurrentGrid != null) _mdl.FillCellsList(_dbManager.CurrentGrid);
                 
             }
 
             return View(_mdl);
         }
+        // @onkeyup = "SubmitValidCellValue(event, this.id)",
+        // @onblur = "this.form.submit()"
 
         [HttpPost]
         public IActionResult Index(SudokuBoardViewModel mdl)
         {
-            _dbManager.ChangeUser(_currentUserId);
-            mdl.changedCellCoordinates = -11;
+            // "sudokuGrid_0__value"
+            try
+            {
+
+                var curGame = _dbManager.currentGame;
+
+
+                int idx = GetCellIndx(mdl.changedCellCoordinates);
+                int i = mdl.sudokuGrid[idx].XCoordinate, j = mdl.sudokuGrid[idx].YCoordinate;
+
+
+                if (mdl.sudokuGrid[idx].value != _dbManager.CurrentFinalGrid[i, j])
+                {
+                    mdl.sudokuGrid[idx].value = "";
+                    mdl.NumberOfMistakes += 1;
+
+                    _dbManager.currentGame.NumberOfMistakes += 1;
+                    _dbManager.SaveChanges();
+                    ModelState.Clear();
+                }
+                else
+                {
+                   
+                    _dbManager.UpdateGameDataInDb_InGame(mdl.FillGridFromCellsList());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                mdl.changedCellCoordinates = "-";
+            }
+
             return View(mdl);
         }
 
+        public IActionResult UserData()
+        {
+            return View();
+        }
 
-       
-
+        #region Additional methods
+        int GetCellIndx(string str)
+        {
+            string[] ss = str.Split("_");
+            if(ss != null && ss.Length > 0)
+            {
+                int n;
+                if(!int.TryParse(ss[1], out n))
+                {
+                    return -1;
+                }
+                return n;
+            }
+            return -1;
+        }
+        #endregion
 
     }
 }

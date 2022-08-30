@@ -1,59 +1,82 @@
 ﻿@model SudokuBoardViewModel
 
 
-<div class="text-center">
-    <h1 class="display-4">Sudoku for Volodya</h1>
-    <p>Learn about <a href="https://www.sudokuonline.io/tips/sudoku-rules">Sudoku here</a>.</p>
-</div>
-
-@using (Html.BeginForm("Index", "SudokuBoard", FormMethod.Post))
+<div style="width: 100%; margin-top: 50px">
+    <div style="float: left;  width: 20%; ">
+        <p>
+            Кол-во ошибок: @Html.DisplayFor(m => m.NumberOfMistakes, new
 {
+maxlength = "1",
+size = "1",
+autocomplete = "off",
+style = "border:none"
+})
+        </p>
+        <p>
+            User Id: @Html.DisplayFor(m => m.UserId)
+        </p>
+        <p>
+            Level: @Html.DisplayFor(m => m.GameLevel)
+        </p>
 
-    @Html.HiddenFor(m => m.GameStatus)
-    @Html.HiddenFor(m => m.GameLevel)
-    @Html.HiddenFor(m => m.changedCellCoordinates, new { @id = "changedCellCoordinates", @Name = "changedCellCoordinates" })
-
-
-    <table width="550px">
-        @{
-            int cellN = 0;
-            var tbConfig = new
-            {
-                maxlength = "1",
-                size = "1",
-                autocomplete = "off",
-                style = "border:none",
-                @onkeyup = "SubmitValidCellValue(event)",
-                @onblur = "this.form.submit()"
-
-            };
-        }
-        @for (int i = 0; i < 9; i++)
+    </div>
+    <div style="width: 60%; border-left: thin solid; margin-left: 20% ">
+        @using (Html.BeginForm("Index", "SudokuBoard", FormMethod.Post))
         {
-            <tr>
-                @for (int j = 0; j < 9; j++)
-                {
-                    <td>
-
-                        @Html.TextBoxFor(m => m.sudokuGrid[cellN].value, tbConfig)
-                        @Html.HiddenFor(m => m.sudokuGrid[cellN].XCoordinate)
-                        @Html.HiddenFor(m => m.sudokuGrid[cellN].YCoordinate)
-
-                        @{
-                            cellN++;
-                        }
-                    </td>
-
+            @Html.HiddenFor(m => m.GameStatus)
+            @Html.HiddenFor(m => m.changedCellCoordinates, new { @id = "changedCellCoordinates", @Name = "changedCellCoordinates" })
+            <table width="450px">
+                @{
+                    int cellN = 0;
 
                 }
-            </tr>
+                @for (int i = 0; i < 9; i++)
+                {
+                    <tr>
+                        @for (int j = 0; j < 9; j++)
+                        {
+                            string cellNmbS = (i * 9 + j).ToString();
+                            <td>
+
+                                @Html.TextBoxFor(m => m.sudokuGrid[cellN].value,
+                               new
+                               {
+                                   maxlength = "1",
+                                   size = "1",
+                                   autocomplete = "off",
+                                   style = "border:none",
+                                   @onkeyup = "SubmitValidCellValue(event, this.id)",
+                                   @onchange = "this.form.submit()"
+
+
+
+                               }
+                               )
+                                @Html.HiddenFor(m => m.sudokuGrid[cellN].XCoordinate)
+                                @Html.HiddenFor(m => m.sudokuGrid[cellN].YCoordinate)
+
+                                @{
+                                    cellN++;
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
         }
-    </table>
-}
 
-<script type="text/javascript">function SubmitValidCellValue(event) {
+    </div>
+    <div style="float:right; width: 20%">
+        
 
-        changedCellCoordinates.value = 2;
+    </div>
+</div>
+
+
+<script type="text/javascript">function SubmitValidCellValue(event, id) {
+
+        changedCellCoordinates.value = id;
+
         var value = event.currentTarget.value;
         if ((value == "") || (1 <= value && value <= 9)) {
             document.updateForm.submit();

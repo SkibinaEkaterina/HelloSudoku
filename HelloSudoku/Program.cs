@@ -9,7 +9,7 @@ builder.Services.AddDbContext<DBContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<ISudokuGenerator, SimpleSudokuGenerator>();
+builder.Services.AddTransient<ISudokuGenerator, SudokuSuperGenerator>(); // SimpleSudokuGenerator
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

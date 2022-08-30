@@ -9,8 +9,9 @@ namespace HelloSudoku.ViewsModel
         public List<Cell> sudokuGrid { get; set; }
         public bool GameStatus { get; set; }
         public int GameLevel { get; set; }
-        public int changedCellCoordinates { get; set; } = -11;
+        public string changedCellCoordinates { get; set; } = "-";
         public int UserId { get; set; }
+        public int NumberOfMistakes { get; set; }
 
         public SudokuBoardViewModel()
         {
@@ -44,6 +45,18 @@ namespace HelloSudoku.ViewsModel
                         XCoordinate = i, YCoordinate = j });
                 }
             }
+        }
+
+        public string[,] FillGridFromCellsList()
+        {
+            string[,] grid = new string[9, 9];
+
+            foreach(var el in sudokuGrid)
+            {
+                grid[el.XCoordinate, el.YCoordinate] = el.value;
+            }
+
+            return grid;
         }
 
         #endregion Fill Cells list methods

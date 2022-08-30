@@ -4,7 +4,7 @@ using HelloSudoku.Models;
 
 namespace HelloSudoku.Data.Managers
 {
-    public class SudokuManager : IGame
+    public class SudokuManager
     {
         public SudokuGame currentGame { get; set; }
         DBContext ctx;
@@ -20,6 +20,8 @@ namespace HelloSudoku.Data.Managers
                     return null;
                 return GetGridFromString(currentGame.Grid);
             }
+            set
+            { }
         }
 
         public string[,]? CurrentFinalGrid
@@ -47,29 +49,54 @@ namespace HelloSudoku.Data.Managers
         }
 
         #region Update Game Data
+
+        public void SaveChanges()
+        {
+            ctx.SaveChanges();
+        }
+
+
+        
+        
         // main 
-        public void UpdateGameDataInDb(string grid, string finGrid, bool gameStatus)
+        public void UpdateGameDataInDb(string grid, string finGrid, bool gameStatus, int GameLevel, int NumberOfMistakes)
         {
             currentGame.FinalGrid = finGrid;
             currentGame.Grid = grid;
             currentGame.GameStatus = gameStatus;
+            currentGame.GameLevel = GameLevel;
+            currentGame.NumberOfMistakes = NumberOfMistakes;
             ctx.SaveChanges();
         }
 
-        public void UpdateGameDataInDb(int[,] grid, int[,] finGrid, bool gameStatus)
+        public void UpdateGameDataInDb(int[,] grid, int[,] finGrid, bool gameStatus, int GameLevel, int NumberOfMistakes)
         {
             UpdateGameDataInDb(grid == null ? "" : GetStringFromGrid(grid),
                                finGrid == null ? "" : GetStringFromGrid(finGrid),
-                               gameStatus);
+                               gameStatus, GameLevel, NumberOfMistakes);
 
         }
 
-        public void UpdateGameDataInDb(string[,] grid, string[,] finGrid, bool gameStatus)
+        public void UpdateGameDataInDb(string[,] grid, string[,] finGrid, bool gameStatus, int GameLevel, int NumberOfMistakes)
         {
             UpdateGameDataInDb(grid == null ? "" : GetStringFromGrid(grid),
                                finGrid == null ? "" : GetStringFromGrid(finGrid),
-                               gameStatus);
+                               gameStatus, GameLevel, NumberOfMistakes);
 
+        }
+
+        // only grid and nmb of mistakes
+        public void UpdateGameDataInDb_InGame(string grid)
+        {
+            currentGame.Grid = grid;
+
+            ctx.SaveChanges();
+        }
+        public void UpdateGameDataInDb_InGame(string[,] grid)
+        {
+            currentGame.Grid = grid == null ? "" : GetStringFromGrid(grid);
+
+            ctx.SaveChanges();
         }
 
         #endregion Update Game Data

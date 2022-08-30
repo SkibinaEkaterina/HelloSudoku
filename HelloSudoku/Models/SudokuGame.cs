@@ -13,6 +13,7 @@ namespace HelloSudoku.Models
 
         public bool? GameStatus { get; set; }
         public int GameLevel { get; set; }
+        public int NumberOfMistakes { get; set; } = 0;
 
     }
 }
