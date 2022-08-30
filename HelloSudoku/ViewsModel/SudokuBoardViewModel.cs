@@ -27,7 +27,7 @@ namespace HelloSudoku.ViewsModel
             {
                 for (int j = 0; j < ncols; j++)
                 {
-                    sudokuGrid.Add(new Cell() { value = sgrid[i, j], XCoordinate = i, YCoordinate = j });
+                    sudokuGrid.Add(new Cell() { value = sgrid[i, j] == "0" ? "" : sgrid[i, j], XCoordinate = i, YCoordinate = j });
                 }
             }
         }

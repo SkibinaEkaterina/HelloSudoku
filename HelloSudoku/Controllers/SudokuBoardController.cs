@@ -74,7 +74,6 @@ namespace HelloSudoku.Controllers
         [HttpPost]
         public IActionResult Index(SudokuBoardViewModel mdl)
         {
-
             _dbManager.ChangeUser(_currentUserId);
             mdl.changedCellCoordinates = -11;
             return View(mdl);
