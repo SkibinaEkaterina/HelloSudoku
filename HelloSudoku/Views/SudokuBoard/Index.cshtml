@@ -1,28 +1,31 @@
 ﻿@model SudokuBoardViewModel
 
-
-<div style="width: 100%; margin-top: 50px">
-    <div style="float: left;  width: 20%; ">
-        <p>
-            Кол-во ошибок: @Html.DisplayFor(m => m.NumberOfMistakes, new
+@using (Html.BeginForm("Index", "SudokuBoard", FormMethod.Post))
 {
-maxlength = "1",
-size = "1",
-autocomplete = "off",
-style = "border:none"
-})
-        </p>
-        <p>
-            User Id: @Html.DisplayFor(m => m.UserId)
-        </p>
-        <p>
-            Level: @Html.DisplayFor(m => m.GameLevel)
-        </p>
+    <div style="width: 100%; margin-top: 50px">
+        <div style="float: left;  width: 20%; ">
+            <p>
+                Кол-во ошибок: @Html.DisplayFor(m => m.NumberOfMistakes, new
+ {
+ maxlength = "1",
+ size = "1",
+ autocomplete = "off",
+ style = "border:none"
+ })
+                @Html.HiddenFor(m => m.NumberOfMistakes)
+            </p>
+            <p>
+                User Id: @Html.DisplayFor(m => m.UserId)
+                @Html.HiddenFor(m => m.UserId)
+            </p>
+            <p>
+                Level: @Html.DisplayFor(m => m.GameLevel)
+                @Html.HiddenFor(m => m.GameLevel)
+            </p>
 
-    </div>
-    <div style="width: 60%; border-left: thin solid; margin-left: 20% ">
-        @using (Html.BeginForm("Index", "SudokuBoard", FormMethod.Post))
-        {
+        </div>
+        <div style="width: 60%; border-left: thin solid; margin-left: 20% ">
+
             @Html.HiddenFor(m => m.GameStatus)
             @Html.HiddenFor(m => m.changedCellCoordinates, new { @id = "changedCellCoordinates", @Name = "changedCellCoordinates" })
             <table width="450px">
@@ -31,27 +34,43 @@ style = "border:none"
 
                 }
                 @for (int i = 0; i < 9; i++)
-                {
+                    {
                     <tr>
                         @for (int j = 0; j < 9; j++)
-                        {
-                            string cellNmbS = (i * 9 + j).ToString();
+                            {
                             <td>
 
-                                @Html.TextBoxFor(m => m.sudokuGrid[cellN].value,
-                               new
-                               {
-                                   maxlength = "1",
-                                   size = "1",
-                                   autocomplete = "off",
-                                   style = "border:none",
-                                   @onkeyup = "SubmitValidCellValue(event, this.id)",
-                                   @onchange = "this.form.submit()"
+
+                                @if (Model.sudokuGrid[cellN].value == "")
+                                    {
+                                    @Html.TextBoxFor(m => m.sudokuGrid[cellN].value,
+                                      new
+                                      {
+                                          maxlength = "1",
+                                          size = "1",
+                                          autocomplete = "on",
+                                          style = "border:none",
+                                          @onkeyup = "SubmitValidCellValue(event, this.id)",
+                                          @onchange = "this.form.submit()"
+
+
+                                      })
+                                    }
+                                    else
+                                    {
+                                    @Html.TextBoxFor(m => m.sudokuGrid[cellN].value,
+                                      new
+                                      {
+                                          maxlength = "1",
+                                          size = "1",
+                                          style = "border:none",
+                                          disabled = "disabled"
+                                      })
+                                    @Html.HiddenFor(m => m.sudokuGrid[cellN].value)
+                                    }
 
 
 
-                               }
-                               )
                                 @Html.HiddenFor(m => m.sudokuGrid[cellN].XCoordinate)
                                 @Html.HiddenFor(m => m.sudokuGrid[cellN].YCoordinate)
 
@@ -59,29 +78,30 @@ style = "border:none"
                                     cellN++;
                                 }
                             </td>
-                        }
+                                    }
                     </tr>
-                }
+                                    }
             </table>
-        }
+            
 
+        </div>
+        <div style="float:right; width: 20%">
+
+
+        </div>
     </div>
-    <div style="float:right; width: 20%">
-        
-
-    </div>
-</div>
 
 
-<script type="text/javascript">function SubmitValidCellValue(event, id) {
+}
+    <script type="text/javascript">function SubmitValidCellValue(event, id) {
 
-        changedCellCoordinates.value = id;
+            changedCellCoordinates.value = id;
 
-        var value = event.currentTarget.value;
-        if ((value == "") || (1 <= value && value <= 9)) {
-            document.updateForm.submit();
-        } else {
-            event.currentTarget.value = "";
-        }
-    }</script>
+            var value = event.currentTarget.value;
+            if ((value == "") || (1 <= value && value <= 9)) {
+                document.updateForm.submit();
+            } else {
+                event.currentTarget.value = "";
+            }
+        }</script>
 

@@ -97,7 +97,6 @@ namespace HelloSudoku.Controllers
 
                     _dbManager.currentGame.NumberOfMistakes += 1;
                     _dbManager.SaveChanges();
-                    ModelState.Clear();
                 }
                 else
                 {
@@ -113,6 +112,12 @@ namespace HelloSudoku.Controllers
             finally
             {
                 mdl.changedCellCoordinates = "-";
+                ModelState.Clear();
+
+                foreach(var el in mdl.sudokuGrid.Where(e => e.value == null))
+                {
+                    el.value = "";
+                }
             }
 
             return View(mdl);
