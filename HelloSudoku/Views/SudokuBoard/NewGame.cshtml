@@ -1,0 +1,12 @@
+﻿<h3>Новая игра</h3>
+
+<div style="margin-left: auto; margin-right: auto;">
+    @using (Html.BeginForm("NewGame", "SudokuBoard", FormMethod.Post))
+    {
+        @Html.DropDownList("userid", ViewBag.Users as SelectList) <br /> <br />
+        @Html.DropDownList("level", ViewBag.Levels as SelectList) <br /> <br />
+        <input type="submit" value="Выбрать" />
+    }
+
+</div>
+

@@ -33,7 +33,7 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=SudokuBoard}/{action=Index}/{id?}");
+    pattern: "{controller=SudokuBoard}/{action=LogIn}/{id?}");
 
 app.Run();
 

@@ -20,16 +20,15 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SudokuGame" asp-action="Index">Start a new game</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="SudokuBoard" asp-action="LogIn">Сменить игрока</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SudokuGame" asp-action="Privacy">Finish game</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="SudokuBoard" asp-action="NewGame">Новая игра</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="https://www.sudokuonline.io/tips/sudoku-rules">Sudoku Rules</a>
+                            <a class="nav-link text-dark" href="https://www.sudokuonline.io/tips/sudoku-rules">Правила Судоку</a>
                         </li>
                     </ul>
-                    @await Html.PartialAsync("UserData")
                 </div>
             </div>
         </nav>

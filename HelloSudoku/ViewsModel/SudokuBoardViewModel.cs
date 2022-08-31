@@ -9,8 +9,10 @@ namespace HelloSudoku.ViewsModel
         public List<Cell> sudokuGrid { get; set; }
         public bool GameStatus { get; set; }
         public int GameLevel { get; set; }
+        public string GameLevelName { get; set; }
         public string changedCellCoordinates { get; set; } = "-";
         public int UserId { get; set; }
+        public string UserName { get; set; }
         public int NumberOfMistakes { get; set; }
 
         public SudokuBoardViewModel()

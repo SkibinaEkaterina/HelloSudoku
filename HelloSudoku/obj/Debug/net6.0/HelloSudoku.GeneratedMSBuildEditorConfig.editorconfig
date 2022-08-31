@@ -31,8 +31,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vkb2t1Qm9hcmQvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ekaterina/Projects/HelloSudoku/HelloSudoku/Views/SudokuBoard/UserData.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vkb2t1Qm9hcmQvVXNlckRhdGEuY3NodG1s
+[/Users/ekaterina/Projects/HelloSudoku/HelloSudoku/Views/SudokuBoard/LogIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vkb2t1Qm9hcmQvTG9nSW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ekaterina/Projects/HelloSudoku/HelloSudoku/Views/SudokuBoard/NewGame.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vkb2t1Qm9hcmQvTmV3R2FtZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/ekaterina/Projects/HelloSudoku/HelloSudoku/Views/SudokuGame/Index.cshtml]

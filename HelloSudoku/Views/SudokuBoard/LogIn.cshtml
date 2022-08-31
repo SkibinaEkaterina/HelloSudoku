@@ -1,0 +1,10 @@
+﻿<h3>Выбор игрока</h3>
+
+<div style="margin-left: auto; margin-right: auto;">
+    @using (Html.BeginForm("LogIn", "SudokuBoard", FormMethod.Post))
+    {
+        @Html.DropDownList("userid", ViewBag.Users as SelectList) <br /> <br />
+        <input type="submit" value="Выбрать"/>
+    }
+
+</div>

@@ -8,6 +8,7 @@ namespace HelloSudoku.Models
     {
         [Key]
         public int UserId { get; set; }
+        public string UserName { get; set; } = "User";
         public string? Grid { get; set; }
         public string? FinalGrid { get; set; }
 

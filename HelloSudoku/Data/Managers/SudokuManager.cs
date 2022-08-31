@@ -6,6 +6,8 @@ namespace HelloSudoku.Data.Managers
 {
     public class SudokuManager
     {
+
+        #region SudokuManager fields/props
         public SudokuGame currentGame { get; set; }
         DBContext ctx;
 
@@ -34,30 +36,38 @@ namespace HelloSudoku.Data.Managers
             }
         }
 
-        
+        #endregion
 
+        #region Constructor
         public SudokuManager(DBContext ctx, int UserId)
         {
             this.ctx = ctx;
-            this.currentGame = ctx.GameInfo.Where(s => s.UserId == UserId).First();
+            ChangeUser(UserId);
         }
+        #endregion
 
-
+        #region Change user
         public void ChangeUser(int UserId)
         {
-            this.currentGame = ctx.GameInfo.Where(s => s.UserId == UserId).First();
+            if(UserId != -1)
+            {
+                currentGame = ctx.GameInfo.Where(s => s.UserId == UserId).First();
+            }
+            else
+            {
+                currentGame = ctx.GameInfo.First();
+            }
+            
         }
+        #endregion
 
-        #region Update Game Data
+        #region Update Game Data methods
 
         public void SaveChanges()
         {
             ctx.SaveChanges();
         }
 
-
-        
-        
         // main 
         public void UpdateGameDataInDb(string grid, string finGrid, bool gameStatus, int GameLevel, int NumberOfMistakes)
         {
@@ -101,7 +111,8 @@ namespace HelloSudoku.Data.Managers
 
         #endregion Update Game Data
 
-        #region Grids Transformations
+        #region Sudoku Grid Transformation methods
+
         public static string GetStringFromGrid(int[,] gr)
         {
             string str = "";

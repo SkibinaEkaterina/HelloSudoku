@@ -6,21 +6,23 @@
         <div style="float: left;  width: 20%; ">
             <p>
                 Кол-во ошибок: @Html.DisplayFor(m => m.NumberOfMistakes, new
- {
- maxlength = "1",
- size = "1",
- autocomplete = "off",
- style = "border:none"
- })
+                 {
+                 maxlength = "1",
+                 size = "1",
+                 autocomplete = "off",
+                 style = "border:none"
+                 })
                 @Html.HiddenFor(m => m.NumberOfMistakes)
             </p>
             <p>
-                User Id: @Html.DisplayFor(m => m.UserId)
+                Игрок: @Html.DisplayFor(m => m.UserName)
                 @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.UserName)
             </p>
             <p>
-                Level: @Html.DisplayFor(m => m.GameLevel)
+                Уровень: @Html.DisplayFor(m => m.GameLevelName)
                 @Html.HiddenFor(m => m.GameLevel)
+                @Html.HiddenFor(m => m.GameLevelName)
             </p>
 
         </div>
@@ -39,8 +41,6 @@
                         @for (int j = 0; j < 9; j++)
                             {
                             <td>
-
-
                                 @if (Model.sudokuGrid[cellN].value == "")
                                     {
                                     @Html.TextBoxFor(m => m.sudokuGrid[cellN].value,
