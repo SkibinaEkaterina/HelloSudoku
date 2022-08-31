@@ -72,8 +72,9 @@ namespace HelloSudoku.Services
 
         void ShuffleGrid()
         {
-            foreach (int nStep in GenerateRandomArrayOfIntegers(5, 500))
+            foreach (int nStep in GenerateRandomArrayOfIntegers(5, 3000))
             {
+                Console.WriteLine(nStep);
                 var del = GetMatrixChangeMethod(nStep);
                 if (del != null) _baseGrid = del.Invoke(_baseGrid);
             }
@@ -107,7 +108,27 @@ namespace HelloSudoku.Services
         private int[] GenerateRandomArrayOfIntegers(int Max, int nmb)
         {
             Random rnd = new Random((int)DateTime.Now.Ticks);
-            int[] result = Enumerable.Repeat(0, nmb).Select(i => rnd.Next(1, Max)).ToArray();
+            int[] result = new int[nmb];
+
+            for(int i=0; i<nmb; i++)
+            {
+                if(i > 1)
+                {
+                    int newNumber;
+                    do
+                    {
+                        newNumber = rnd.Next(1, Max+1);
+                    } while (result[i-1] == newNumber || result[i - 2] == newNumber);
+
+                    result[i] = newNumber;
+                }
+                else
+                {
+                    result[i] = rnd.Next(1, Max+1);
+                }
+            }
+
+
             return result;
         }
 

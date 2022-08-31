@@ -59,10 +59,10 @@ namespace HelloSudoku.Services
         {
             if (!CheckSquareMatrix(grid)) return grid;
 
-            int numLineArea = rnd.Next(2);
-            int[] lineNmbs = Enumerable.Range(0, nmbOfAreas - 1).ToArray();
+            int numLineArea = rnd.Next(3);
+            int[] lineNmbs = Enumerable.Range(0, nmbOfAreas).ToArray();
 
-            lineNmbs = lineNmbs.OrderBy(x => rnd.Next()).ToArray();
+            lineNmbs = lineNmbs.OrderBy(x => rnd.Next(10)).ToArray();
 
             int nmbLine1 = numLineArea * nmbOfLinesInArea + lineNmbs[0];
             int nmbLine2 = numLineArea * nmbOfLinesInArea + lineNmbs[1];
@@ -92,9 +92,9 @@ namespace HelloSudoku.Services
         public static int[,] SwapAreasHorizontally(int[,] grid)
         {
             if (!CheckSquareMatrix(grid)) return grid;
-            int[] areasNmbs = Enumerable.Range(0, nmbOfAreas - 1).ToArray();
+            int[] areasNmbs = Enumerable.Range(0, nmbOfAreas).ToArray();
 
-            areasNmbs = areasNmbs.OrderBy(x => rnd.Next()).ToArray();
+            areasNmbs = areasNmbs.OrderBy(x => rnd.Next(10)).ToArray();
 
             for (int i = 0; i < nmbOfLinesInArea; i++)
             {
